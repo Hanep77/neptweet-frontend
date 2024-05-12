@@ -2,56 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import AuthLayout from './Layouts/AuthLayout.jsx'
-import Login from './Pages/Login.jsx'
-import Register from './Pages/Register.jsx'
-import DefaultLayout from './Layouts/DefaultLayout.jsx'
-import Home from './Pages/Home.jsx'
-import Profile from './Pages/Profile.jsx'
-import Post from './Pages/Post.jsx'
-import CreatePost from './Pages/CreatePost.jsx'
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <DefaultLayout />,
-    children: [
-      {
-        path: "/",
-        element: <Home />
-      },
-      {
-        path: "/profile",
-        element: <Profile />
-      },
-      {
-        path: "/post",
-        element: <Post />
-      },
-      {
-        path: "/posts/create",
-        element: <CreatePost />
-      }
-    ]
-  },
-  {
-    path: "/",
-    element: <AuthLayout />,
-    children: [
-      {
-        path: "/login",
-        element: <Login />
-      },
-      {
-        path: "/register",
-        element: <Register />
-      }
-    ]
-  }
-])
+import ContextProvider from './context/ContextProvider.jsx'
+import router from './router.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ContextProvider>
+      <RouterProvider router={router} />
+    </ContextProvider>
   </React.StrictMode>,
 )
