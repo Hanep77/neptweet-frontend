@@ -15,7 +15,8 @@ axiosClient.interceptors.response.use(response => {
     return response
 }, error => {
     if (error.response && error.response.status === 401) {
-        router.navigate('/login')
+        localStorage.removeItem("TOKEN")
+        window.location.pathname == "/login" ? router.navigate('/login') : window.location.reload()
         throw error
     }
 

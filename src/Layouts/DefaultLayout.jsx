@@ -1,15 +1,22 @@
 import { Navigate, Outlet } from "react-router-dom";
 import Navigation from "../components/Templates/Navigation";
 import Navbar from "../components/Templates/Navbar";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { StateContext } from "../context/ContextProvider";
+import axiosClient from "../axios";
 
 export default function DefaultLayout() {
-    const { currentUser, userToken } = useContext(StateContext)
+    const { setCurrentUser, userToken } = useContext(StateContext)
 
     if (!userToken) {
         return <Navigate to="/login" />
     }
+
+    useEffect(() => {
+        axiosClient.get('/me').then(response => {
+            setCurrentUser(response.data)
+        })
+    }, [])
 
     return (
         <>
