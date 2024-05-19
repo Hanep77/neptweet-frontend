@@ -33,7 +33,7 @@ export default function Profile() {
             </div>
             <div className="flex flex-col gap-2 mb-24">
                 {posts?.map(post => (
-                    <PostCard key={post.id} author={post.author} time={post.created_at} body={post.body} />
+                    <PostCard key={post.id} post={post} />
                 ))}
             </div>
         </div>
