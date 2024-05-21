@@ -5,6 +5,7 @@ import { BiComment, BiUser } from "react-icons/bi";
 import { GrLike } from "react-icons/gr";
 import { formatDistanceToNow } from "date-fns";
 import Comment from "../components/Templates/Comment";
+import CommentInput from "../components/Cores/CommentInput";
 
 export default function Post() {
     const { pathname } = useLocation()
@@ -14,9 +15,10 @@ export default function Post() {
     useEffect(() => {
         axiosClient.get(pathname)
             .then(response => {
-                console.log(response.data.data)
                 setPost(response.data.data)
-                setComments(response.data.data.comments)
+                const data = response.data.data.comments
+                const sortedComments = data.toReversed()
+                setComments(sortedComments)
             })
     }, [pathname])
 
@@ -24,8 +26,19 @@ export default function Post() {
         try {
             return formatDistanceToNow(new Date(date), { addSuffix: true });
         } catch (error) {
-            console.log(error)
+            // console.log(error)
         }
+    }
+
+    function handleAddComment(event) {
+        event.preventDefault()
+
+        axiosClient.post('/comments/create', {
+            post_id: post.id,
+            body: event.target.body.value
+        }).then(response => {
+            setComments([response.data, ...comments])
+        })
     }
 
     return (
@@ -46,16 +59,11 @@ export default function Post() {
                     </div>
                 </div>
                 <div className="mb-3">
-                    <form action="">
-                        <div className="flex rounded-md overflow-hidden">
-                            <input type="text" id="comment" placeholder="write comment..." className="border-s border-y rounded-s-md focus:border-blue-500 outline-none w-full h-8 px-2" />
-                            <button type="submit" className="w-20 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white">send</button>
-                        </div>
-                    </form>
+                    <CommentInput onAddComment={handleAddComment} />
                 </div>
                 <div className="flex flex-col gap-2">
                     {comments.map(comment => {
-                        return <Comment author={comment.author.name} body={comment.body} time={timeAgo(comment.created_at)} />
+                        return <Comment key={comment.id} author={comment.author.name} body={comment.body} time={timeAgo(comment.created_at)} />
                     })}
                 </div>
             </div>
