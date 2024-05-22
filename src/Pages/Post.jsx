@@ -3,14 +3,17 @@ import axiosClient from "../axios";
 import { useLocation } from "react-router-dom";
 import { BiComment, BiUser } from "react-icons/bi";
 import { GrLike } from "react-icons/gr";
-import { formatDistanceToNow } from "date-fns";
 import Comment from "../components/Templates/Comment";
 import CommentInput from "../components/Cores/CommentInput";
+import useConvertTime from "../hooks/useConvertTime";
+import ThreeDotMenu from "../components/Cores/ThreeDotMenu";
+import HeaderPostInformation from "../components/Cores/HeaderPostInformation";
 
 export default function Post() {
     const { pathname } = useLocation()
     const [post, setPost] = useState({})
     const [comments, setComments] = useState([])
+    const { timeAgo } = useConvertTime()
 
     useEffect(() => {
         axiosClient.get(pathname)
@@ -21,14 +24,6 @@ export default function Post() {
                 setComments(sortedComments)
             })
     }, [pathname])
-
-    function timeAgo(date) {
-        try {
-            return formatDistanceToNow(new Date(date), { addSuffix: true });
-        } catch (error) {
-            // console.log(error)
-        }
-    }
 
     function handleAddComment(event) {
         event.preventDefault()
@@ -43,14 +38,10 @@ export default function Post() {
 
     return (
         <div className="pt-2 pb-24">
-            <div className="w-full bg-white px-5 py-2 rounded">
+            <div className="w-full bg-white px-5 py-4 rounded">
                 <div className="mb-3">
-                    <div className="flex items-center gap-3 mb-3">
-                        <div className="inline-block"><BiUser className="border text-4xl rounded-full bg-slate-200 border-slate-400 p-1" /></div>
-                        <div>
-                            <h5 className="font-medium">{post.author?.name}</h5>
-                            <p className="text-sm text-slate-600">{timeAgo(post.created_at)}</p>
-                        </div>
+                    <div className="flex justify-between">
+                        <HeaderPostInformation post={post} />
                     </div>
                     <p className="mb-3">{post.body}</p>
                     <div className="flex justify-around gap-5">

@@ -7,6 +7,7 @@ import Profile from './Pages/Profile.jsx'
 import Post from './Pages/Post.jsx'
 import CreatePost from './Pages/CreatePost.jsx'
 import { createBrowserRouter } from 'react-router-dom'
+import UpdatePost from './Pages/UpdatePost.jsx'
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path: "/posts/:id",
                 element: <Post />
+            },
+            {
+                path: "/posts/edit/:id",
+                element: <UpdatePost />
             }
         ]
     },
