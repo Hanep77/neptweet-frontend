@@ -54,7 +54,7 @@ export default function Post() {
                 </div>
                 <div className="flex flex-col gap-2">
                     {comments.map(comment => {
-                        return <Comment key={comment.id} author={comment.author.name} body={comment.body} time={timeAgo(comment.created_at)} />
+                        return <Comment key={comment.id} comment={comment} />
                     })}
                 </div>
             </div>
