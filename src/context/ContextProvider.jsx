@@ -4,12 +4,15 @@ export const StateContext = createContext({
     currentUser: {},
     setCurrentUser: () => { },
     userToken: null,
-    setUserToken: () => { }
+    setUserToken: () => { },
+    activeDropdown: null,
+    setActiveDropdown: () => { }
 })
 
 export default function ContextProvider({ children }) {
     const [currentUser, setCurrentUser] = useState({})
     const [userToken, _setUserToken] = useState(localStorage.getItem('TOKEN'))
+    const [activeDropdown, setActiveDropdown] = useState(null)
 
     function setUserToken(token) {
         if (token) {
@@ -21,7 +24,7 @@ export default function ContextProvider({ children }) {
     }
 
     return (
-        <StateContext.Provider value={{ currentUser, setCurrentUser, userToken, setUserToken }}>
+        <StateContext.Provider value={{ currentUser, setCurrentUser, userToken, setUserToken, activeDropdown, setActiveDropdown }}>
             {children}
         </StateContext.Provider>
     )
