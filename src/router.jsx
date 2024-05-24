@@ -8,6 +8,7 @@ import Post from './Pages/Post.jsx'
 import CreatePost from './Pages/CreatePost.jsx'
 import { createBrowserRouter } from 'react-router-dom'
 import UpdatePost from './Pages/UpdatePost.jsx'
+import Search from './Pages/Search.jsx'
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
             },
             {
                 path: "/profile",
+                element: <Profile />
+            },
+            {
+                path: "/users/:id",
                 element: <Profile />
             },
             {
@@ -37,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path: "/posts/edit/:id",
                 element: <UpdatePost />
+            },
+            {
+                path: "/search",
+                element: <Search />
             }
         ]
     },
