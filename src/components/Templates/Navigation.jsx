@@ -7,9 +7,9 @@ export default function Navigation() {
     const { pathname } = useLocation()
     return (
         <div className="fixed bottom-5 right-0 left-0 px-4 md:px-0 z-50">
-            <div className="flex justify-around items-center max-w-screen-sm m-auto h-16 bg-blue-600 text-white border rounded-full">
+            <div className="flex justify-around items-center max-w-lg m-auto h-14 bg-blue-600 text-white border rounded-full">
                 <Link to="/" className="text-3xl hover:-translate-y-1 transition">{pathname == "/" ? <GoHomeFill /> : <GoHome />}</Link>
-                <Link to="/posts/create" className="text-5xl hover:-translate-y-1 transition">{pathname == "/posts/create" ? <IoAddCircle /> : <IoAddCircleOutline />}</Link>
+                <Link to="/posts/create" className="text-4xl hover:-translate-y-1 transition">{pathname == "/posts/create" ? <IoAddCircle /> : <IoAddCircleOutline />}</Link>
                 <Link to="/profile" className="text-3xl hover:-translate-y-1 transition">{pathname == "/profile" ? <RiUser6Fill /> : <RiUser6Line />}</Link>
             </div>
         </div>

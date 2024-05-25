@@ -21,7 +21,7 @@ export default function DefaultLayout() {
     return (
         <>
             <Navbar />
-            <main className="max-w-screen-sm m-auto px-4 md:px-0 mt-16">
+            <main className="max-w-lg m-auto px-4 md:px-0 mt-16">
                 <Outlet />
             </main>
             <Navigation />
