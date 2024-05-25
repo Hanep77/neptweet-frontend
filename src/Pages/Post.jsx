@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axiosClient from "../axios";
 import { useLocation } from "react-router-dom";
-import { BiComment, BiUser } from "react-icons/bi";
+import { BiComment, BiLike, BiSolidLike, BiUser } from "react-icons/bi";
 import { GrLike } from "react-icons/gr";
 import Comment from "../components/Templates/Comment";
 import CommentInput from "../components/Cores/CommentInput";
@@ -14,11 +14,15 @@ export default function Post() {
     const [post, setPost] = useState({})
     const [comments, setComments] = useState([])
     const { timeAgo } = useConvertTime()
+    const [isLiked, setIsLiked] = useState(false)
+    const [likes, setLikes] = useState(0)
 
     useEffect(() => {
         axiosClient.get(pathname)
             .then(response => {
                 setPost(response.data.data)
+                setIsLiked(response.data.data.is_liked_by_user)
+                setLikes(response.data.data.likes_count)
                 const data = response.data.data.comments
                 const sortedComments = data.toReversed()
                 setComments(sortedComments)
@@ -36,6 +40,26 @@ export default function Post() {
         })
     }
 
+    function handleLike() {
+        if (isLiked) {
+            axiosClient.delete(`/posts/${post.id}/like`)
+                .then(response => {
+                    if (response.status == 200) {
+                        setIsLiked(false)
+                        setLikes(likes - 1)
+                    }
+                })
+        } else {
+            axiosClient.post(`/posts/${post.id}/like`)
+                .then(response => {
+                    if (response.status == 200) {
+                        setIsLiked(true)
+                        setLikes(likes + 1)
+                    }
+                })
+        }
+    }
+
     return (
         <div className="pt-2 pb-24">
             <div className="w-full bg-white px-5 py-4 rounded">
@@ -44,8 +68,12 @@ export default function Post() {
                         <HeaderPostInformation post={post} />
                     </div>
                     <p className="mb-3">{post.body}</p>
+                    <div className={`${likes || post?.comments?.length ? "mb-3" : ""} flex gap-2 text-xs`}>
+                        <p className={`${!likes && "hidden"}`}>{likes} likes</p>
+                        <p className={`${!post?.comments?.length && "hidden"}`}>{post?.comments?.length} comments</p>
+                    </div>
                     <div className="flex justify-around gap-5">
-                        <button type="button" className="text-xl"><GrLike /></button>
+                        <button type="button" onClick={handleLike} className="text-xl">{isLiked ? <BiSolidLike /> : <BiLike />}</button>
                         <label htmlFor="comment" className="text-xl cursor-pointer"><BiComment /></label>
                     </div>
                 </div>
