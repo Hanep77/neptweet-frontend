@@ -31,8 +31,11 @@ export default function UpdatePost() {
     return (
         <div className="pt-2">
             <form action="" onSubmit={(event) => handleCreatePost(event, id)}>
-                <textarea name="body" rows={4} className="w-full p-2 outline-none rounded" defaultValue={post.body}></textarea>
-                <button type="submit" className="w-full h-10 flex justify-center items-center gap-1 rounded bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white">Post <BiSend /></button>
+                <textarea name="body" rows={4} className="bg-zinc-900 w-full p-2 outline-none rounded" defaultValue={post.body}></textarea>
+                <button type="submit"
+                    className="w-full h-10 flex justify-center items-center gap-1 rounded bg-cyan-700 hover:bg-cyan-600 active:bg-cyan-500 text-white">
+                    Post <BiSend />
+                </button>
             </form>
         </div>
     )

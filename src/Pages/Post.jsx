@@ -62,7 +62,7 @@ export default function Post() {
 
     return (
         <div className="pt-2 pb-24">
-            <div className="w-full bg-white px-5 py-4 rounded">
+            <div className="w-full bg-zinc-900 px-5 py-4 rounded">
                 <div className="mb-3">
                     <div className="flex justify-between">
                         <HeaderPostInformation post={post} />

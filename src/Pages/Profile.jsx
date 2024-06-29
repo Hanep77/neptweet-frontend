@@ -32,25 +32,25 @@ export default function Profile() {
 
 function ProfileUI({ user, posts }) {
     return (
-        <div className="pt-2">
-            <div className="bg-blue-500 h-32 rounded-t"></div>
-            <div className="flex flex-col items-center justify-center px-6 relative bg-white mb-2 rounded-b">
-                <div className="w-24 h-24 flex justify-center items-center text-slate-300 text-5xl bg-white border-4 border-slate-200 rounded-full absolute -top-6">
+        <div className="pt-3">
+            <div className="bg-zinc-800 h-32 rounded-t"></div>
+            <div className="flex flex-col items-center justify-center px-6 relative bg-zinc-900 mb-2 rounded-b">
+                <div className="w-24 h-24 flex justify-center items-center text-slate-300 text-5xl bg-zinc-800 border-4 border-zinc-700 rounded-full absolute -top-6">
                     <FaUser />
                 </div>
                 <h4 className="text-lg md:text-xl font-semibold mt-20 pb-4">{user.name}</h4>
             </div>
             <div className="grid grid-cols-2 gap-2 text-center mb-2">
-                <div className="py-4 bg-white rounded">
+                <div className="py-4 bg-zinc-900 rounded">
                     <h3 className="text-3xl font-medium">1</h3>
                     <p>Likes</p>
                 </div>
-                <div className="py-4 bg-white rounded">
+                <div className="py-4 bg-zinc-900 rounded">
                     <h3 className="text-3xl font-medium">{posts?.length}</h3>
                     <p>Posts</p>
                 </div>
             </div>
-            <div className="flex flex-col gap-2 mb-24">
+            <div className="flex flex-col gap-2 mb-20 md:mb-3">
                 {posts?.map(post => (
                     <PostCard key={post.id} post={post} />
                 ))}

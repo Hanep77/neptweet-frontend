@@ -29,16 +29,18 @@ export default function Search() {
 
     return (
         <>
-            <form action="" className="pt-2 mb-3">
+            <form action="" className="pt-3 mb-2">
                 <div className="flex rounded-md overflow-hidden">
-                    <input type="text" name="q" className="w-full h-9 outline-none px-2 text-lg focus:border border-blue-500 rounded-y-md rounded-s-md" required autoComplete="off" />
-                    <button className="w-32 h-9 bg-blue-500 text-white">Search</button>
+                    <input type="text" name="q" placeholder="search"
+                        className="w-full bg-zinc-900 h-10 flex items-center outline-none px-4 text-lg focus:border border-cyan-700 rounded-y-md rounded-s-md"
+                        required autoComplete="off" />
+                    <button className="w-32 h-10 bg-cyan-700 text-white">Search</button>
                 </div>
             </form>
 
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-2">
                 {users?.map(user => (
-                    <Link to={'/users/' + user.id} key={user.id} className="flex items-center gap-2 border-b bg-slate-100 hover:bg-white p-2 rounded-md">
+                    <Link to={'/users/' + user.id} key={user.id} className="flex items-center gap-2 bg-zinc-900 hover:bg-zinc-800 p-2 rounded-md">
                         <div className="inline-block"><BiUser className="border text-4xl rounded-full bg-white border-slate-400 p-1" /></div>
                         <div>
                             <h3 className="font-medium text-lg">{user.name}</h3>

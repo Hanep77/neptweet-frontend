@@ -30,19 +30,19 @@ export default function PostCard({ post }) {
     }
 
     return (
-        <div className="w-full bg-white p-5 rounded">
+        <div className="w-full p-5 bg-zinc-900 rounded">
             <div className="flex justify-between">
                 <HeaderPostInformation post={post} />
                 <ThreeDotMenu post={post} />
             </div>
-            <p className="mb-3">{post.body}</p>
-            <div className={`${likes || post.comments.length ? "mb-3" : ""} flex gap-2 text-xs`}>
+            <p className="mb-2">{post.body}</p>
+            <div className={`${likes || post.comments.length ? "mb-2" : ""} flex gap-2 text-sm text-zinc-400`}>
                 <p className={`${!likes && "hidden"}`}>{likes} likes</p>
                 <p className={`${!post.comments.length && "hidden"}`}>{post.comments.length} comments</p>
             </div>
-            <div className="flex gap-5">
-                <button type="button" onClick={handleLike} className="text-xl">{isLiked ? <BiSolidLike /> : <BiLike />}</button>
-                <Link to={'/posts/' + post.id} className="text-xl"><BiComment /></Link>
+            <div className="flex justify-around gap-2">
+                <button type="button" onClick={handleLike} className="text-xl bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 rounded-full w-1/2 h-8 flex justify-center items-center">{isLiked ? <BiSolidLike /> : <BiLike />}</button>
+                <Link to={'/posts/' + post.id} className="text-xl bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 rounded-full w-1/2 flex h-8 justify-center items-center"><BiComment /></Link>
             </div>
         </div>
     )

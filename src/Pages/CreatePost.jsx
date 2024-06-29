@@ -17,7 +17,7 @@ export default function CreatePost() {
     return (
         <div className="pt-2">
             <form action="" onSubmit={handleCreatePost}>
-                <textarea name="body" rows={4} className="w-full p-2 outline-none rounded"></textarea>
+                <textarea name="body" rows={4} className="w-full bg-zinc-900 p-2 outline-none rounded"></textarea>
                 <button type="submit" className="w-full h-10 flex justify-center items-center gap-1 rounded bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white">Post <BiSend /></button>
             </form>
         </div>
