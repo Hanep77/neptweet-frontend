@@ -33,7 +33,7 @@ export default function Register() {
                 <Input type="email" name="email" title="Email" error={errors.email} />
                 <Input type="password" name="password" title="Password" error={errors.password} />
                 <Input type="password" name="password_confirmation" title="Confirm Password" />
-                <button type="submit" className="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 w-full h-8 rounded text-white mb-1">Register</button>
+                <button type="submit" className="bg-cyan-700 hover:bg-cyan-600 active:bg-cyan-500 w-full h-8 rounded text-white mb-1">Register</button>
             </form>
         </AuthTemplate>
     )

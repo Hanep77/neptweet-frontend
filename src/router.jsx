@@ -5,7 +5,6 @@ import DefaultLayout from './Layouts/DefaultLayout.jsx'
 import Home from './Pages/Home.jsx'
 import Profile from './Pages/Profile.jsx'
 import Post from './Pages/Post.jsx'
-import CreatePost from './Pages/CreatePost.jsx'
 import { createBrowserRouter } from 'react-router-dom'
 import UpdatePost from './Pages/UpdatePost.jsx'
 import Search from './Pages/Search.jsx'
@@ -30,10 +29,6 @@ const router = createBrowserRouter([
             {
                 path: "/post",
                 element: <Post />
-            },
-            {
-                path: "/posts/create",
-                element: <CreatePost />
             },
             {
                 path: "/posts/:id",

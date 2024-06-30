@@ -22,7 +22,8 @@ export default function Login() {
                 if (error.response.status == 422) {
                     setErrors(error.response.data.errors)
                 } else if (error.response.status == 401) {
-                    setErrors({ unauthorized: error.response.data.error.message })
+                    console.log(error)
+                    setErrors({ unauthorized: error.response.data.message })
                 }
             }
         })
@@ -34,7 +35,7 @@ export default function Login() {
             <form action="" onSubmit={handleLogin}>
                 <Input type="email" name="email" title="Email" error={errors.email} />
                 <Input type="password" name="password" title="Password" error={errors.password} />
-                <button type="submit" className="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 w-full h-8 rounded text-white mb-1">Login</button>
+                <button type="submit" className="bg-cyan-700 hover:bg-cyan-600 active:bg-blue-500 w-full h-8 rounded text-white mb-1">Login</button>
             </form>
         </AuthTemplate>
     )

@@ -1,8 +1,9 @@
-import { BiLogOut, BiSearch } from "react-icons/bi";
+import { BiSearch } from "react-icons/bi";
 import axiosClient from "../../axios";
 import { useContext } from "react";
 import { StateContext } from "../../context/ContextProvider";
 import { Link } from "react-router-dom";
+import { RiLogoutCircleRLine } from "react-icons/ri";
 
 export default function Navbar() {
     const { setCurrentUser, setUserToken } = useContext(StateContext)
@@ -18,10 +19,20 @@ export default function Navbar() {
     return (
         <header className="md:hidden fixed top-0 right-0 left-0 bg-zinc-900 z-50">
             <nav className="flex justify-between px-4 items-center m-auto h-16">
-                <h1 className="text-2xl font-medium">NepTweet</h1>
+                <Link to={'/'}
+                    className="flex items-center h-10 gap-2 font-semibold italic underline rounded-full text-2xl">
+                    NepTweet
+                </Link>
                 <div className="flex items-center gap-2 md:gap-4">
-                    {/* <Link to={'/search'} className="flex items-center gap-1 h-8 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 px-2 text-lg rounded-full text-blue-700"><BiSearch /> <span className="text-base">Search</span></Link> */}
-                    {/* <button type="button" className="flex h-8 bg-red-500 hover:bg-red-600 active:bg-red-700 text-white items-center gap-2 border rounded-md px-2" onClick={handleLogout}><BiLogOut /> <span className="hidden md:flex">Logout</span></button> */}
+                    <Link to={'/search'}
+                        className="flex justify-center items-center w-10 h-10 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 text-xl rounded-full">
+                        <BiSearch />
+                    </Link>
+                    <button type="button"
+                        className="flex justify-center items-center w-10 h-10 bg-red-800 hover:bg-red-700 active:bg-red-600 text-xl rounded-full"
+                        onClick={handleLogout}>
+                        <RiLogoutCircleRLine />
+                    </button>
                 </div>
             </nav>
         </header>

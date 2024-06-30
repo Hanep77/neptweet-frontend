@@ -24,10 +24,10 @@ export default function Home() {
     }
 
     return (
-        <div className="flex flex-col gap-3 pt-3 mb-20">
+        <div className="flex flex-col gap-3 pt-3 mb-20 md:mb-4">
             <div>
                 <form onSubmit={handleCreatePost}>
-                    <textarea rows="3" name="body" className="w-full rounded bg-zinc-900 px-2 py-1" placeholder="create post"></textarea>
+                    <textarea rows="3" id="createPost" name="body" className="w-full rounded bg-zinc-900 px-2 py-1" placeholder="create post"></textarea>
                     <button type="submit" className="w-full h-8 bg-cyan-700 hover:bg-cyan-600 active:bg-cyan-500 rounded">Post</button>
                 </form>
             </div>

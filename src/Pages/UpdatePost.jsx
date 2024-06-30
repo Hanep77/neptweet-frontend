@@ -1,6 +1,5 @@
 import { BiSend } from "react-icons/bi";
 import axiosClient from "../axios";
-import router from "../router";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -23,7 +22,7 @@ export default function UpdatePost() {
             body: event.target.body.value
         }).then(response => {
             if (response.status == 200) {
-                router.navigate('/')
+                history.back()
             }
         })
     }

@@ -61,7 +61,7 @@ export default function Post() {
     }
 
     return (
-        <div className="pt-2 pb-24">
+        <div className="pt-3 pb-20 md:pb-4">
             <div className="w-full bg-zinc-900 px-5 py-4 rounded">
                 <div className="mb-3">
                     <div className="flex justify-between">
