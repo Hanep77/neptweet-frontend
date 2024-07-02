@@ -7,7 +7,7 @@ export default function Home() {
 
     useEffect(() => {
         axiosClient.get('/posts').then(response => {
-            setPosts(response.data.data)
+            setPosts(response.data)
         })
     }, [])
 

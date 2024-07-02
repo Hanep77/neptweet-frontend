@@ -11,7 +11,7 @@ export default function UpdatePost() {
     useEffect(() => {
         axiosClient('/posts/' + id)
             .then(response => {
-                setPost(response.data.data)
+                setPost(response.data)
             })
     }, [])
 

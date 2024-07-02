@@ -1,29 +1,25 @@
 import { useEffect, useState } from "react";
 import axiosClient from "../axios";
 import { useLocation } from "react-router-dom";
-import { BiComment, BiLike, BiSolidLike, BiUser } from "react-icons/bi";
-import { GrLike } from "react-icons/gr";
+import { BiComment, BiLike, BiSolidLike } from "react-icons/bi";
 import Comment from "../components/Templates/Comment";
 import CommentInput from "../components/Cores/CommentInput";
-import useConvertTime from "../hooks/useConvertTime";
-import ThreeDotMenu from "../components/Cores/ThreeDotMenu";
 import HeaderPostInformation from "../components/Cores/HeaderPostInformation";
 
 export default function Post() {
     const { pathname } = useLocation()
     const [post, setPost] = useState({})
     const [comments, setComments] = useState([])
-    const { timeAgo } = useConvertTime()
     const [isLiked, setIsLiked] = useState(false)
     const [likes, setLikes] = useState(0)
 
     useEffect(() => {
         axiosClient.get(pathname)
             .then(response => {
-                setPost(response.data.data)
-                setIsLiked(response.data.data.is_liked_by_user)
-                setLikes(response.data.data.likes_count)
-                const data = response.data.data.comments
+                setPost(response.data)
+                setIsLiked(response.data.is_liked_by_user)
+                setLikes(response.data.likes_count)
+                const data = response.data.comments
                 const sortedComments = data.toReversed()
                 setComments(sortedComments)
             })
@@ -36,6 +32,7 @@ export default function Post() {
             post_id: post.id,
             body: event.target.body.value
         }).then(response => {
+            console.log(response)
             setComments([response.data, ...comments])
         })
     }

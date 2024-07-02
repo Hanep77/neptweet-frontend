@@ -23,7 +23,7 @@ export default function Login() {
                     setErrors(error.response.data.errors)
                 } else if (error.response.status == 401) {
                     console.log(error)
-                    setErrors({ unauthorized: error.response.data.message })
+                    setErrors({ unauthorized: error.response.data.error.message })
                 }
             }
         })
