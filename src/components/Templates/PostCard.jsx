@@ -35,7 +35,9 @@ export default function PostCard({ post }) {
                 <HeaderPostInformation post={post} />
                 <ThreeDotMenu post={post} />
             </div>
-            <p className="mb-2">{post.body}</p>
+            <div className="flex flex-col gap-2 mb-3">
+                {JSON.parse(post.body).map((par, index) => <p key={index}>{par}</p>)}
+            </div>
             <div className={`${likes || post.comments.length ? "mb-2" : ""} flex gap-2 text-sm text-zinc-400`}>
                 <p className={`${!likes && "hidden"}`}>{likes} likes</p>
                 <p className={`${!post.comments.length && "hidden"}`}>{post.comments.length} comments</p>

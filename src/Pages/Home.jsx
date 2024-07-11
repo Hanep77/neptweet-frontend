@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import PostCard from "../components/Templates/PostCard";
 import axiosClient from "../axios";
+import Editor from "../components/Templates/Editor";
 
 export default function Home() {
     const [posts, setPosts] = useState([])
+    const [words, setWords] = useState([])
 
     useEffect(() => {
         axiosClient.get('/posts').then(response => {
@@ -15,7 +17,7 @@ export default function Home() {
         event.preventDefault()
 
         axiosClient.post('/posts/create', {
-            body: event.target.body.value
+            body: words
         }).then(response => {
             if (response.status == 201) {
                 window.location.reload()
@@ -27,7 +29,7 @@ export default function Home() {
         <div className="flex flex-col gap-3 pt-3 mb-20 md:mb-4">
             <div>
                 <form onSubmit={handleCreatePost}>
-                    <textarea rows="3" id="createPost" name="body" className="w-full rounded bg-zinc-900 px-2 py-1" placeholder="create post"></textarea>
+                    <Editor className={"resize-none w-full rounded bg-zinc-900"} setWords={setWords} rows={3} />
                     <button type="submit" className="w-full h-8 bg-cyan-700 hover:bg-cyan-600 active:bg-cyan-500 rounded">Post</button>
                 </form>
             </div>
