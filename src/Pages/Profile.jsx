@@ -1,36 +1,22 @@
-import { useContext, useEffect, useState } from "react"
-import { StateContext } from "../context/ContextProvider"
+import { useEffect, useState } from "react"
 import { FaUser } from "react-icons/fa"
 import axiosClient from "../axios"
 import PostCard from "../components/Templates/PostCard"
 import { useLocation } from "react-router-dom"
 
 export default function Profile() {
-    const { currentUser } = useContext(StateContext)
     const { pathname } = useLocation()
+    const [user, setUser] = useState({})
+    const [totalLikes, setTotalLikes] = useState(0)
 
-    if (pathname == "/profile") {
-        return (
-            <ProfileUI user={currentUser} posts={currentUser.posts} />
-        )
-    } else {
-        const [user, setUser] = useState({})
+    useEffect(() => {
+        axiosClient.get('/users/' + pathname.split('/')[2])
+            .then(response => {
+                setUser(response.data)
+                setTotalLikes(response.data.posts.reduce((prev, curr) => prev + curr.likes_count, 0))
+            })
+    }, [pathname])
 
-        useEffect(() => {
-            axiosClient.get('/users/' + pathname.split('/')[2])
-                .then(response => {
-                    setUser(response.data)
-                })
-        }, [])
-
-        return (
-            <ProfileUI user={user} posts={user.posts} />
-        )
-    }
-
-}
-
-function ProfileUI({ user, posts }) {
     return (
         <div className="pt-3">
             <div className="bg-zinc-800 h-32 rounded-t"></div>
@@ -42,16 +28,16 @@ function ProfileUI({ user, posts }) {
             </div>
             <div className="grid grid-cols-2 gap-2 text-center mb-2">
                 <div className="py-4 bg-zinc-900 rounded">
-                    <h3 className="text-3xl font-medium">1</h3>
+                    <h3 className="text-3xl font-medium">{totalLikes}</h3>
                     <p>Likes</p>
                 </div>
                 <div className="py-4 bg-zinc-900 rounded">
-                    <h3 className="text-3xl font-medium">{posts?.length}</h3>
+                    <h3 className="text-3xl font-medium">{user.posts?.length}</h3>
                     <p>Posts</p>
                 </div>
             </div>
             <div className="flex flex-col gap-2 mb-20 md:mb-3">
-                {posts?.map(post => (
+                {user.posts?.reverse().map(post => (
                     <PostCard key={post.id} post={post} />
                 ))}
             </div>

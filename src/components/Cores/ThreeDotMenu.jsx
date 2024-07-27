@@ -30,7 +30,7 @@ export default function ThreeDotMenu({ post }) {
                 <button className="text-xl" onClick={() => toggleDropdown(post.id)}><BsThreeDotsVertical /></button>
                 <div className={`${activeDropdown != post.id && "hidden"} border border-zinc-400 overflow-hidden rounded bg-zinc-800 absolute right-0`}>
                     <div className={`${currentUser.id != post?.author?.id && "hidden"}`}>
-                        <Link to={'/posts/edit/' + post.id} className="flex items-center gap-2 w-full px-4 py-1 hover:bg-zinc-700"><BiEditAlt /> Edit</Link>
+                        <Link to={'/posts/edit/' + post.id} onClick={() => setActiveDropdown(null)} className="flex items-center gap-2 w-full px-4 py-1 hover:bg-zinc-700"><BiEditAlt /> Edit</Link>
                         <button onClick={() => handleDelete(post.id)} className="flex items-center gap-2 w-full px-4 py-1 hover:text-white hover:bg-red-500"><BiTrash /> Delete</button>
                     </div>
                     <div className={`${currentUser.id == post?.author?.id && "hidden"}`}>

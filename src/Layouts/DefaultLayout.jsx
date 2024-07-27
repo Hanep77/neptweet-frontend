@@ -10,7 +10,7 @@ import { BiLogOut, BiSearch } from "react-icons/bi";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 
 export default function DefaultLayout() {
-    const { setCurrentUser, userToken, setUserToken } = useContext(StateContext)
+    const { currentUser, setCurrentUser, userToken, setUserToken } = useContext(StateContext)
 
     if (!userToken) {
         return <Navigate to="/login" />
@@ -48,7 +48,7 @@ export default function DefaultLayout() {
                         className="flex items-center h-10 gap-2 font-medium px-4 rounded-full bg-zinc-900 hover:bg-zinc-800 active:bg-zinc-700">
                         <BiSearch />Search
                     </Link>
-                    <Link to={'/profile'}
+                    <Link to={'/users/' + currentUser.id}
                         className="flex items-center h-10 gap-2 font-medium px-4 rounded-full bg-zinc-900 hover:bg-zinc-800 active:bg-zinc-700">
                         <FaUser />Profile
                     </Link>
@@ -63,8 +63,7 @@ export default function DefaultLayout() {
                     </main>
                 </div>
                 <aside className="hidden lg:block pt-3 px-3 bg-slate sticky top-0 right-0 h-full lg:w-64 xl:w-80">
-                    <div to={'/profile'}
-                        className="flex items-center h-10 gap-2 font-medium px-4 rounded-full bg-zinc-900 hover:bg-zinc-800 active:bg-zinc-700">
+                    <div className="flex items-center h-10 gap-2 font-medium px-4 rounded-full bg-zinc-900 hover:bg-zinc-800 active:bg-zinc-700">
                         Don't Know Yet What to Put here
                     </div>
                 </aside>
