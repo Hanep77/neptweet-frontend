@@ -5,7 +5,7 @@ import Editor from "../components/Templates/Editor";
 
 export default function Home() {
     const [posts, setPosts] = useState([])
-    const [words, setWords] = useState([])
+    const [text, setText] = useState([])
 
     useEffect(() => {
         axiosClient.get('/posts').then(response => {
@@ -17,7 +17,7 @@ export default function Home() {
         event.preventDefault()
 
         axiosClient.post('/posts/create', {
-            body: words
+            body: text
         }).then(response => {
             if (response.status == 201) {
                 window.location.reload()
@@ -29,7 +29,7 @@ export default function Home() {
         <div className="flex flex-col gap-3 pt-3 mb-20 md:mb-4">
             <div>
                 <form onSubmit={handleCreatePost}>
-                    <Editor className={"resize-none w-full rounded bg-zinc-900"} setWords={setWords} rows={3} />
+                    <Editor className={"resize-none w-full rounded bg-zinc-900"} setText={setText} rows={3} />
                     <button type="submit" className="w-full h-8 bg-cyan-700 hover:bg-cyan-600 active:bg-cyan-500 rounded">Post</button>
                 </form>
             </div>

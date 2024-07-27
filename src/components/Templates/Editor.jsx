@@ -1,14 +1,14 @@
 import React from "react"
 
-const Editor = ({ rows, setWords, className }) => {
+const Editor = ({ rows, setText, className, defaultValue }) => {
     const handleInput = (e) => {
         const target = e.target
-        setWords(target.value.split("\n"))
+        setText(target.value.split("\n"))
     }
 
     return (
         <textarea className={`${className} p-2 outline-none whitespace-pre-wrap overflow`}
-            rows={rows} onKeyUp={handleInput} spellCheck="false">
+            rows={rows} onKeyUp={handleInput} spellCheck="false" defaultValue={defaultValue}>
         </textarea>
     )
 }
